@@ -1,5 +1,13 @@
 include RandomData
 
+# Create a Unique Post
+Post.find_or_create_by(title: 'My Super Special Unique Post') do |post|
+  post.body = "This is the awesomely singular body of my super special unique post!"
+end
+Post.find_or_create_by(title: 'Another Unique Post') do |post|
+  post.body = "The text in this body doesn't exist anywhere else."
+end
+
 # Create Posts
 50.times do
   Post.create!(
