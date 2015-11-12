@@ -1,5 +1,15 @@
 include RandomData
 
+# Create advertisements
+5.times do
+  Advertisement.create!(
+    title: RandomData.random_sentence,
+    copy: RandomData.random_paragraph,
+    price: rand(1..1000)
+  )
+end
+advertisements = Advertisement.all
+
 # Create Posts
 50.times do
   Post.create!(
@@ -20,3 +30,4 @@ end
 puts "Seed finished"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
+puts "#{Advertisement.count} ads created"
