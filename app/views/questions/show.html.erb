@@ -1,4 +1,8 @@
-<h1><%= @question.title %></h1>
+<% if @question.resolved %>
+  <h1><%= "RESOLVED - #{@question.title}" %></h1>
+<% else %>
+  <h1><%= @question.title %></h1>
+<% end %>
 
 <div class="row">
   <div class="col-md-8">
