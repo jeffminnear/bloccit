@@ -4,18 +4,18 @@ include RandomData
 RSpec.describe AdvertisementsController, type: :controller do
 
   let (:my_advertisement) { Advertisement.create!(title: RandomData.random_sentence, copy: RandomData.random_paragraph, price: rand(1..1000)) }
-  # describe "GET #index" do
-  #   it "returns http success" do
-  #     get :index
-  #     expect(response).to have_http_status(:success)
-  #   end
-  #
-  #   it "assigns [my_advertisement] to @advertisements" do
-  #     get :index
-  #     expect(assigns(:advertisements)).to eq([my_advertisement])
-  #   end
-  # end
-  #
+  describe "GET #index" do
+    it "returns http success" do
+      get :index
+      expect(response).to have_http_status(:success)
+    end
+
+    it "assigns [my_advertisement] to @advertisements" do
+      get :index
+      expect(assigns(:advertisements)).to eq([my_advertisement])
+    end
+  end
+
   describe "GET #show" do
     it "returns http success" do
       get :show, {id: my_advertisement.id}
