@@ -86,10 +86,7 @@ RSpec.describe QuestionsController, type: :controller do
     it "assigns question to be update to @question" do
       get :edit, {id: my_question.id}
       question_instance = assigns(:question)
-      expect(question_instance.id).to eq(my_question.id)
-      expect(question_instance.title).to eq(my_question.title)
-      expect(question_instance.body).to eq(my_question.body)
-      expect(question_instance.resolved).to eq(my_question.resolved)
+      expect(question_instance).to eq(my_question)
     end
   end
 
