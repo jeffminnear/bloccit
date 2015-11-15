@@ -34,4 +34,8 @@ module RandomData
     punctuations = ['.', '!', '?']
     punctuations[rand(0..(punctuations.length-1))]
   end
+
+  def random_price
+    rand(1...1000)
+  end
 end

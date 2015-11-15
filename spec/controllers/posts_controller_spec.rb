@@ -43,7 +43,7 @@ RSpec.describe PostsController, type: :controller do
 
   describe "POST #create" do
     it "increases the number of Post by 1" do
-      expect{post :create, topic_id: my_topic.id, post: {name: RandomData.random_sentence, body: RandomData.random_paragraph}}.to change(Post,:count).by(1)
+      expect{post :create, topic_id: my_topic.id, post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}}.to change(Post,:count).by(1)
     end
 
     it "assigns the new post to @post" do
@@ -71,9 +71,7 @@ RSpec.describe PostsController, type: :controller do
     it "assigns post to be updated to @post" do
       get :edit, topic_id: my_topic.id, id: my_post.id
       post_instance = assigns(:post)
-      expect(post_instance.id).to eq(my_post.id)
-      expect(post_instance.title).to eq(my_post.title)
-      expect(post_instance.body).to eq(my_post.body)
+      expect(post_instance).to eq(my_post)
     end
   end
 
@@ -103,7 +101,7 @@ RSpec.describe PostsController, type: :controller do
       expect(count).to eq(0)
     end
 
-    it "redirects to posts index" do
+    it "redirects to my topic" do
       delete :destroy, topic_id: my_topic.id, id: my_post.id
       expect(response).to redirect_to(my_topic)
     end
