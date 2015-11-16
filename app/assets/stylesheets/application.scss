@@ -17,3 +17,42 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+#sign-up {
+  margin-top: 5px;
+}
+
+#sign-up > a {
+  color: white;
+}
+
+
+.user-info {
+  margin-top: 9px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.nav {
+  margin-top: 5px;
+  border-radius: 0.5em;
+}
+
+a {
+  color: #5F7380;
+}
+
+.nav-tabs > li > a {
+  background-color: lightblue;
+  border-radius: 0.5em;
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #4EA0BE;
+}
+
+.nav-tabs > li > a:hover {
+  background-color: aliceblue;
+}
