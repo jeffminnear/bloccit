@@ -6,6 +6,8 @@ RSpec.describe User, type: :model do
   # Shoulda tests for name
   it { should validate_presence_of(:name) }
   it { should validate_length_of(:name).is_at_least(1) }
+  it { should allow_value("Frank Grimes").for(:name) }
+  it { should_not allow_value("frank grimes").for(:name) }
   # Shoulda tests for email
   it { should validate_presence_of(:email) }
   it { should validate_uniqueness_of(:email) }
