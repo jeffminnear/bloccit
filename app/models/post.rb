@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
   has_many :comments, dependent: :destroy
 
   # default_scope { order('created_at DESC') }
+  # Additional commands must be used to bypass Default Scope
 
   def self.ordered_by_title
     order('title ASC')
