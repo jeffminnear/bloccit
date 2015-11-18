@@ -7,6 +7,7 @@ RSpec.describe Post, type: :model do
   let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
   let(:post) { topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user) }
 
+  it { should have_many(:comments) }
   # Shoulda tests for Topic
   it { should belong_to(:topic) }
   it { should validate_presence_of(:topic) }
