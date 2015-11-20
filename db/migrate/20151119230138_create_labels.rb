@@ -5,6 +5,5 @@ class CreateLabels < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_foreign_key :labelable
   end
 end
