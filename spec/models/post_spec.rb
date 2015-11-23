@@ -81,4 +81,17 @@ RSpec.describe Post, type: :model do
       end
     end
   end
+
+  describe "after_create" do
+    it "favorites the new post" do
+      expect(user.favorites).to be_empty
+      new_post = topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
+      expect(user.favorites).not_to be_empty
+    end
+
+    it "sends email to the user" do
+      new_post = topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
+      expect(FavoriteMailer).to receive(:new_post).with(user, post).and_return(double(deliver_now: true))
+    end
+  end
 end
