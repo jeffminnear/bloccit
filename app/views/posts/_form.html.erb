@@ -17,6 +17,10 @@
     <%= f.label :body %>
     <%= f.text_area :body, rows: 8, class: "form-control", placeholder: "Enter post body" %>
   <% end %>
+  <%= form_group_tag(post.errors[:rating]) do %>
+    <%= f.label :rating %>
+    <%= f.select :rating, options_for_select(Rating.severities.keys, post.rating.try(:severity) || :G) %>
+  <% end %>
   <div class="form-group">
     <%= f.submit "Save", class: "btn btn-success" %>
   </div>
