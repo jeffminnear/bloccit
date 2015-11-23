@@ -12,6 +12,7 @@ RSpec.describe Post, type: :model do
   it { should have_many(:labels).through(:labelings) }
   it { should have_many(:comments) }
   it { should have_many(:votes) }
+  it { should have_many(:favorites) }
   # Shoulda tests for Topic
   it { should belong_to(:topic) }
   it { should validate_presence_of(:topic) }

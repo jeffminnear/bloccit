@@ -33,3 +33,5 @@ gem 'turbolinks'
 gem 'bootstrap-sass'
 # Use BCrypt for encrypting User password_digest
 gem 'bcrypt'
+# Use Figaro for hiding environment variables
+gem 'figaro', '1.0'
