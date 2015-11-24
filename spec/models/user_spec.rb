@@ -117,4 +117,22 @@ RSpec.describe User, type: :model do
       expect(known_user.avatar_url(48)).to eq(expected_gravatar)
     end
   end
+
+  describe ".get_favorites" do
+    let(:known_user)  { create(:user, email: "blochead@bloc.io") }
+    let(:other_user)  { create(:user) }
+    let(:topic)       { create(:topic) }
+    let(:known_post)  { create(:post, topic: topic, user: known_user) }
+    let(:up_vote)     { create(:vote, value: 1, post: known_post, user: known_user) }
+    let(:down_vote)   { create(:vote, value: -1, post: known_post, user: other_user) }
+    before do
+      @post = known_post
+    end
+
+    it "returns all posts the user has favorited" do
+      favorite = user.favorites.where(post: @post).create
+      user_favorites = user.get_favorites
+      expect(user_favorites.first).to eq(favorite)
+    end
+  end
 end

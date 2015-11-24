@@ -44,4 +44,12 @@ module RandomData
     punctuations = ['.', '!', '?']
     punctuations[rand(0..(punctuations.length-1))]
   end
+
+  def random_value
+    if rand(0..1) > 0
+      return 1
+    else
+      return -1
+    end
+  end
 end
