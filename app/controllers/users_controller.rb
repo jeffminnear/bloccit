@@ -18,10 +18,10 @@ class UsersController < ApplicationController
       flash[:error] = "There was an error creating your account. Please try again."
       render :new
     end
+  end
 
-    def show
-      @user = User.find(params[:id])
-      @posts = @user.posts.visible_to(current_user)
-    end
+  def show
+    @user = User.find(params[:id])
+    @posts = @user.posts.visible_to(current_user)
   end
 end
