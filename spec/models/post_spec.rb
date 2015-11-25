@@ -83,20 +83,18 @@ RSpec.describe Post, type: :model do
 
     describe "#create_vote callback" do
       before do
-        my_user = User.create!(name: "some guy", email: "guy@bloccit.com", password: "helloworld", role: :member)
-        create_session(my_user)
+        my_user = User.create!(name: "some guy", email: "guy@bloccit.com", password: "helloworld")
       end
       it "trigger create_vote on create" do
+        new_post = topic.posts.build(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
         expect(new_post).to receive(:create_vote).at_least(:once)
-        new_topic = Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph)
-        new_post = new_topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: my_user)
+        new_post.save
       end
 
       it "#create_vote should up vote new post" do
-        new_topic = Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph)
-        new_post = new_topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: my_user)
+        new_post = topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
         expect(new_post.votes.count).to eq(1)
-        expect(new_post.votes.where(user_id: my_user.id).count).to eq(1)
+        expect(new_post.votes.where(user_id: user.id).count).to eq(1)
         expect(new_post.points).to eq(1)
       end
     end
