@@ -12,14 +12,14 @@ RSpec.describe VotesController, type: :controller do
   context "guest" do
     describe "POST up_vote" do
       it "redirects to sign in view" do
-        post :up_vote, post_id: user_post.id
+        post :up_vote, format: :js, post_id: user_post.id
         expect(response).to redirect_to(new_session_path)
       end
     end
 
     describe "POST down_vote" do
       it "redirects to sign in view" do
-        post :down_vote, post_id: user_post.id
+        post :down_vote, format: :js, post_id: user_post.id
         expect(response).to redirect_to(new_session_path)
       end
     end
@@ -34,66 +34,66 @@ RSpec.describe VotesController, type: :controller do
     describe "POST up_vote" do
       it "increases number of post votes by one if first vote" do
         votes = user_post.votes.count
-        post :up_vote, post_id: user_post.id
+        post :up_vote, format: :js, post_id: user_post.id
         expect(user_post.votes.count).to eq(votes + 1)
       end
 
       it "does not increase number of votes if second vote" do
-        post :up_vote, post_id: user_post.id
+        post :up_vote, format: :js, post_id: user_post.id
         votes = user_post.votes.count
-        post :up_vote, post_id: user_post.id
+        post :up_vote, format: :js, post_id: user_post.id
         expect(user_post.votes.count).to eq(votes)
       end
 
       it "increases the sum of post votes by one" do
         points = user_post.points
-        post :up_vote, post_id: user_post.id
+        post :up_vote, format: :js, post_id: user_post.id
         expect(user_post.points).to eq(points + 1)
       end
 
-      it ":back redirects to posts show page" do
+      it "returns http success" do
         request.env["HTTP_REFERER"] = topic_post_path(my_topic, user_post)
-        post :up_vote, post_id: user_post.id
-        expect(response).to redirect_to([my_topic, user_post])
+        post :up_vote, format: :js, post_id: user_post.id
+        expect(response).to have_http_status(:success)
       end
 
-      it ":back redirects to posts topic show" do
+      it "returns http success" do
         request.env["HTTP_REFERER"] = topic_path(my_topic)
-        post :up_vote, post_id: user_post.id
-        expect(response).to redirect_to(my_topic)
+        post :up_vote, format: :js, post_id: user_post.id
+        expect(response).to have_http_status(:success)
       end
     end
 
     describe "POST down_vote" do
       it "increases number of post votes by one if first vote" do
         votes = user_post.votes.count
-        post :down_vote, post_id: user_post.id
+        post :down_vote, format: :js, post_id: user_post.id
         expect(user_post.votes.count).to eq(votes + 1)
       end
 
       it "does not increase number of votes if second vote" do
-        post :down_vote, post_id: user_post.id
+        post :down_vote, format: :js, post_id: user_post.id
         votes = user_post.votes.count
-        post :down_vote, post_id: user_post.id
+        post :down_vote, format: :js, post_id: user_post.id
         expect(user_post.votes.count).to eq(votes)
       end
 
       it "decreases the sum of post votes by one" do
         points = user_post.points
-        post :down_vote, post_id: user_post.id
+        post :down_vote, format: :js, post_id: user_post.id
         expect(user_post.points).to eq(points - 1)
       end
 
-      it ":back redirects to posts show page" do
+      it "returns http success" do
         request.env["HTTP_REFERER"] = topic_post_path(my_topic, user_post)
-        post :down_vote, post_id: user_post.id
-        expect(response).to redirect_to([my_topic, user_post])
+        post :down_vote, format: :js, post_id: user_post.id
+        expect(response).to have_http_status(:success)
       end
 
-      it ":back redirects to posts topic show" do
+      it "returns http success" do
         request.env["HTTP_REFERER"] = topic_path(my_topic)
-        post :down_vote, post_id: user_post.id
-        expect(response).to redirect_to(my_topic)
+        post :down_vote, format: :js, post_id: user_post.id
+        expect(response).to have_http_status(:success)
       end
     end
   end
