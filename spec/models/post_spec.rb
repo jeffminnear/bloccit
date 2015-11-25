@@ -90,8 +90,9 @@ RSpec.describe Post, type: :model do
     end
 
     it "sends email to the user" do
-      new_post = topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
-      expect(FavoriteMailer).to receive(:new_post).with(user, post).and_return(double(deliver_now: true))
+      new_post = topic.posts.build(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
+      expect(FavoriteMailer).to receive(:new_post).with(user, new_post).and_return(double(deliver_now: true))
+      new_post.save
     end
   end
 end

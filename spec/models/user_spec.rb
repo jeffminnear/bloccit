@@ -100,12 +100,12 @@ RSpec.describe User, type: :model do
     end
 
     it "returns 'nil' if the user has not favorited the post" do
-      expect(user.favorite_for(@post)).to be_nil
+      different_user = User.create!(name: "Some guy", email: "something@bloccit.com", password: "helloworld" )
+      expect(different_user.favorite_for(@post)).to be_nil
     end
 
     it "returns the appropriate favorite if it exists" do
-      favorite = user.favorites.where(post: @post).create
-      expect(user.favorite_for(@post)).to eq(favorite)
+      expect(user.favorite_for(@post)).not_to be_nil
     end
   end
 end
