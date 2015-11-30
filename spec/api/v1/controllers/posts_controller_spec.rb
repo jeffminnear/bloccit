@@ -22,7 +22,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
     end
 
     it "DELETE #destroy returne http unauthenticated" do
-      delete :destroy, topic_id: my_topic.id, id: my_post.id
+      delete :destroy, id: my_post.id
       expect(response).to have_http_status(401)
     end
   end
